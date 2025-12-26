@@ -1,5 +1,6 @@
+
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { Quote, ItineraryItem, ItemType, Library, MasterItem, ItineraryTemplate, QuoteStatus } from '../types.ts';
+import { Quote, ItineraryItem, ItemType, Library, MasterItem, ItineraryTemplate, QuoteStatus } from '../types';
 import { 
   ArrowLeft, Plus, Trash2, Plane, Hotel, 
   TentTree, Car, Sparkles, Save, Eye,
@@ -134,7 +135,7 @@ const QuoteBuilder: React.FC<QuoteBuilderProps> = ({
   const [isSyncing, setIsSyncing] = useState(false);
   const [isSyncingTemplates, setIsSyncingTemplates] = useState(false);
   const [templateSearch, setTemplateSearch] = useState('');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Default closed on all screens
   const [saveModalOpen, setSaveModalOpen] = useState(false);
   const [newTemplateName, setNewTemplateName] = useState('');
   const [newPolicyInput, setNewPolicyInput] = useState('');
@@ -252,7 +253,7 @@ const QuoteBuilder: React.FC<QuoteBuilderProps> = ({
       destination: prev.destination || template.destination
     }));
     setActiveTab('itinerary');
-    setIsSidebarOpen(false);
+    setIsSidebarOpen(false); // Close sidebar after selecting a template
   };
 
   const handleSyncVault = async () => {
@@ -339,6 +340,7 @@ const QuoteBuilder: React.FC<QuoteBuilderProps> = ({
 
       <input type="file" ref={templateImportRef} className="hidden" accept=".json" onChange={handleImportTemplates} />
 
+      {/* MOBILE OVERLAY BACKDROP */}
       {isSidebarOpen && (
         <div 
           className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 lg:hidden"
@@ -346,11 +348,13 @@ const QuoteBuilder: React.FC<QuoteBuilderProps> = ({
         />
       )}
 
+      {/* LEFT SIDEBAR (Vault) with Toggle */}
       <div className={`
         fixed lg:relative h-full z-50 transition-all duration-300 ease-in-out shadow-2xl lg:shadow-none
         ${isSidebarOpen ? 'w-80 translate-x-0' : 'w-16 -translate-x-full lg:translate-x-0'}
         bg-white border-r border-slate-200 flex flex-col shrink-0
       `}>
+        {/* Toggle Button - Repositioned for mobile accessibility */}
         <button 
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className="absolute top-1/2 -right-3 lg:-right-3 -translate-y-1/2 z-50 w-6 h-12 bg-white border border-slate-200 shadow-xl rounded-r-lg flex items-center justify-center text-slate-400 hover:text-brand-600 transition-colors"
@@ -358,6 +362,7 @@ const QuoteBuilder: React.FC<QuoteBuilderProps> = ({
           {isSidebarOpen ? <ChevronLeft size={16}/> : <ChevronRight size={16}/>}
         </button>
 
+        {/* Action Strip (Icons shown when collapsed on desktop) */}
         {!isSidebarOpen && (
           <div className="hidden lg:flex flex-col items-center py-6 gap-6 w-full">
             <div className="p-2 bg-brand-50 text-brand-600 rounded-lg"><Package size={20}/></div>
@@ -375,6 +380,7 @@ const QuoteBuilder: React.FC<QuoteBuilderProps> = ({
           </div>
         )}
 
+        {/* Full Content */}
         <div className={`${isSidebarOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:hidden'} flex flex-col h-full w-80 overflow-hidden transition-all duration-300`}>
           <div className="p-6 border-b border-slate-100 space-y-4">
             <div className="flex items-center gap-3 text-slate-900">
@@ -472,6 +478,7 @@ const QuoteBuilder: React.FC<QuoteBuilderProps> = ({
       </div>
 
       <div className="flex-1 flex flex-col h-full overflow-hidden relative">
+        {/* TOP NAVIGATION BAR */}
         <div className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-4 md:px-6 shadow-sm shrink-0 z-30">
           <div className="flex items-center gap-2 md:gap-4 overflow-hidden">
             <button onClick={onCancel} className="p-2 hover:bg-slate-100 rounded-full text-slate-500 transition-all shrink-0"><ArrowLeft size={20}/></button>
@@ -509,6 +516,7 @@ const QuoteBuilder: React.FC<QuoteBuilderProps> = ({
 
         <div className="flex-1 overflow-y-auto p-4 md:p-10 no-scrollbar scroll-smooth">
           <div className="max-w-4xl mx-auto pb-10">
+            
             {activeTab === 'details' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                 <div className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-100 space-y-6">
@@ -987,6 +995,7 @@ const QuoteBuilder: React.FC<QuoteBuilderProps> = ({
           </div>
         </div>
 
+        {/* STICKY BOTTOM BAR */}
         <div className="sticky bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-slate-200 py-4 px-4 md:px-10 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] shrink-0 pb-safe">
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-4 md:gap-10 w-full sm:w-auto">

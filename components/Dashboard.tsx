@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect, useRef } from 'react';
-import { Quote, QuoteStatus } from '../types.ts';
+import { Quote, QuoteStatus } from '../types';
 import { Plus, Search, MapPin, Calendar, ChevronRight, Trash2, CheckCircle2, Send, FileEdit, MoreHorizontal } from 'lucide-react';
 
 interface DashboardProps {
@@ -14,6 +15,7 @@ const Dashboard: React.FC<DashboardProps> = ({ quotes, onCreateNew, onSelectQuot
   const [openStatusId, setOpenStatusId] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -44,6 +46,7 @@ const Dashboard: React.FC<DashboardProps> = ({ quotes, onCreateNew, onSelectQuot
 
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6 md:space-y-8">
+      {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-serif font-bold text-slate-900">Dashboard</h1>
@@ -58,6 +61,7 @@ const Dashboard: React.FC<DashboardProps> = ({ quotes, onCreateNew, onSelectQuot
         </button>
       </div>
 
+      {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
         <div className="bg-white p-5 md:p-6 rounded-2xl shadow-sm border border-slate-100">
           <p className="text-slate-500 text-xs font-medium uppercase tracking-widest">Draft Proposals</p>
@@ -79,6 +83,7 @@ const Dashboard: React.FC<DashboardProps> = ({ quotes, onCreateNew, onSelectQuot
         </div>
       </div>
 
+      {/* Quote List */}
       <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
         <div className="p-4 md:p-6 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
           <h2 className="text-lg md:text-xl font-semibold text-slate-800 self-start">Active Quotations</h2>
