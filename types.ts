@@ -1,4 +1,5 @@
-export type QuoteStatus = 'draft' | 'pending' | 'approved' | 'booked';
+
+export type QuoteStatus = 'draft' | 'sent' | 'booked' | 'cancelled';
 
 export type ItemType = 'flight' | 'hotel' | 'activity' | 'transfer' | 'other';
 

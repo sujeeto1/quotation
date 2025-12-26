@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Dashboard from './components/Dashboard';
 import QuoteBuilder from './components/QuoteBuilder';
 import QuotePreview from './components/QuotePreview';
-import { Quote, Library, MasterItem, ItineraryTemplate } from './types';
+import { Quote, Library, MasterItem, QuoteStatus } from './types';
 
 type View = 'dashboard' | 'builder' | 'preview';
 
@@ -141,6 +141,16 @@ const App: React.FC = () => {
     setView('dashboard'); 
   };
 
+  const handleDeleteQuote = (id: string) => {
+    if (confirm("Are you sure you want to delete this quotation? This action cannot be undone.")) {
+      setQuotes(prev => prev.filter(q => q.id !== id));
+    }
+  };
+
+  const handleUpdateStatus = (id: string, status: QuoteStatus) => {
+    setQuotes(prev => prev.map(q => q.id === id ? { ...q, status } : q));
+  };
+
   const handlePreviewQuote = (quote: Quote) => {
     setActiveQuote(JSON.parse(JSON.stringify(quote))); 
     setView('preview');
@@ -191,6 +201,8 @@ const App: React.FC = () => {
           quotes={quotes} 
           onCreateNew={() => {setActiveQuote(null); setView('builder');}} 
           onSelectQuote={(q) => {setActiveQuote(JSON.parse(JSON.stringify(q))); setView('builder');}} 
+          onDeleteQuote={handleDeleteQuote}
+          onUpdateStatus={handleUpdateStatus}
         />
       )}
       
