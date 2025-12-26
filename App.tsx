@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
-import Dashboard from './components/Dashboard';
-import QuoteBuilder from './components/QuoteBuilder';
-import QuotePreview from './components/QuotePreview';
-import { Quote, Library, MasterItem, QuoteStatus } from './types';
+import Dashboard from './components/Dashboard.tsx';
+import QuoteBuilder from './components/QuoteBuilder.tsx';
+import QuotePreview from './components/QuotePreview.tsx';
+import { Quote, Library, MasterItem, QuoteStatus } from './types.ts';
 
 type View = 'dashboard' | 'builder' | 'preview';
 
