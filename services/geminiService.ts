@@ -1,12 +1,9 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
-import { ItineraryItem, GeminiItineraryRequest } from "../types";
+import { ItineraryItem, GeminiItineraryRequest } from "../types.ts";
 
-// Always use process.env.API_KEY directly for initialization as per guidelines.
 export const generateItinerary = async (
   request: GeminiItineraryRequest
 ): Promise<Partial<ItineraryItem>[]> => {
-  // Always initialize with named parameters.
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
   const prompt = `
@@ -25,7 +22,6 @@ export const generateItinerary = async (
 
   try {
     const response = await ai.models.generateContent({
-      // Using gemini-3-flash-preview for basic text tasks.
       model: "gemini-3-flash-preview",
       contents: prompt,
       config: {
@@ -52,7 +48,6 @@ export const generateItinerary = async (
       }
     });
 
-    // Access .text property directly, do not call as a method.
     const jsonText = response.text;
     if (!jsonText) return [];
 

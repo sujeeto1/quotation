@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
-import Dashboard from './components/Dashboard';
-import QuoteBuilder from './components/QuoteBuilder';
-import QuotePreview from './components/QuotePreview';
-import { Quote, Library, MasterItem, QuoteStatus } from './types';
+import Dashboard from './components/Dashboard.tsx';
+import QuoteBuilder from './components/QuoteBuilder.tsx';
+import QuotePreview from './components/QuotePreview.tsx';
+import { Quote, Library, MasterItem, QuoteStatus } from './types.ts';
 
 type View = 'dashboard' | 'builder' | 'preview';
 
@@ -46,7 +45,6 @@ const App: React.FC = () => {
     return localStorage.getItem('wanderlust_remote_templates_url') || DEFAULT_TEMPLATES_GIST_URL;
   });
 
-  // Persist quotes and library
   useEffect(() => {
     localStorage.setItem('wanderlust_quotes', JSON.stringify(quotes));
   }, [quotes]);
@@ -77,7 +75,7 @@ const App: React.FC = () => {
         setLibrary(prev => ({ 
           ...prev, 
           ...newLib,
-          itineraryTemplates: prev.itineraryTemplates // Keep existing templates during main library sync
+          itineraryTemplates: prev.itineraryTemplates 
         }));
         localStorage.setItem('wanderlust_last_sync_main', Date.now().toString());
         if (!isAutoSync) alert("Master Library synced!");

@@ -1,6 +1,5 @@
-
 import React, { useMemo } from 'react';
-import { Quote, ItemType, ItineraryItem, Library, MasterItem } from '../types';
+import { Quote, ItemType, ItineraryItem, Library, MasterItem } from '../types.ts';
 import { Plane, Hotel, TentTree, Car, Sparkles, MapPin, Calendar, ArrowLeft, Download, CheckSquare, X, Users, Info, Map, BedDouble, Utensils, Briefcase, User, Layers, Clock, Phone } from 'lucide-react';
 
 interface QuotePreviewProps {
@@ -147,8 +146,6 @@ const QuotePreview: React.FC<QuotePreviewProps> = ({ quote, library, onBack }) =
       </div>
 
       <div className="max-w-4xl mx-auto bg-white shadow-2xl rounded-none md:rounded-xl overflow-hidden print:shadow-none print:rounded-none">
-        
-        {/* Simplified Header with Company Logo & Contact */}
         <div className="bg-brand-50 text-slate-900 p-6 md:p-12 relative overflow-hidden border-b border-brand-100">
           <div className="absolute top-0 right-0 p-12 opacity-5 rotate-12 pointer-events-none text-brand-900 hidden md:block">
              <Map size={240} />
@@ -195,7 +192,6 @@ const QuotePreview: React.FC<QuotePreviewProps> = ({ quote, library, onBack }) =
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 p-6 md:p-12 border-b">
-           {/* Left Column: Guest & Trip Overview */}
            <div className="space-y-8 md:space-y-10">
               <div className="space-y-2">
                  <h3 className="text-slate-400 font-black uppercase text-[8px] md:text-[10px] tracking-[0.2em] flex items-center gap-2">
@@ -228,7 +224,6 @@ const QuotePreview: React.FC<QuotePreviewProps> = ({ quote, library, onBack }) =
               </div>
            </div>
 
-           {/* Right Column: Costing & Breakdown */}
            <div className="md:text-right space-y-4 md:space-y-6">
               <div className="space-y-1">
                 <h3 className="text-slate-400 font-black uppercase text-[8px] md:text-[10px] tracking-[0.2em]">Price Summary</h3>
