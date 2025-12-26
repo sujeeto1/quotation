@@ -7,7 +7,7 @@ export const generateItinerary = async (
   request: GeminiItineraryRequest
 ): Promise<Partial<ItineraryItem>[]> => {
   // Always initialize with named parameters.
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || 'FAKE_API_KEY_FOR_DEVELOPMENT' });
 
   const prompt = `
     Create a detailed day-by-day travel itinerary for a trip to ${request.destination} for ${request.durationDays} days.
